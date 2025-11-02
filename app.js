@@ -91,7 +91,6 @@
       openOverlay(
         'Game Over',
         `
-        <h2>Game Over!</h2>
         <p>Your final score: <strong>${score}</strong></p>
         <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;">
           <button id="restart-btn">Start New Round</button>
@@ -238,3 +237,4 @@
     updateUI();
   });
 })();
+
