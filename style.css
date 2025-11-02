@@ -268,7 +268,7 @@ button:hover {
   footer {
     flex-wrap: wrap;
     font-size: 0.9em;
-    padding: 8px;
+    padding: 6px 0;
   }
 
   .footer-btn {
@@ -318,3 +318,5 @@ button:hover {
   h2 { font-size: 1.3em; }
   p { font-size: 0.9em; }
 }
+
+
