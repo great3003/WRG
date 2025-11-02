@@ -116,15 +116,18 @@ footer {
   border: none;
   font-weight: bold;
   color: #1A1A2E;
-  font-size: 1em;
+  font-size: 0.85em;
   cursor: pointer;
   transition: transform 0.2s;
+  padding: 8px 0;
 }
 
 .footer-btn:hover {
   transform: scale(1.15);
   color: var(--header-color);
 }
+
+
 
 #overlay,
 #start-overlay {
@@ -318,5 +321,6 @@ button:hover {
   h2 { font-size: 1.3em; }
   p { font-size: 0.9em; }
 }
+
 
 
