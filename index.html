@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WRG - Words Random Game</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- don't include supabase here for now to avoid runtime errors -->
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">WRG – WORDS RANDOM GAME</div>
+    <button id="you-btn" class="you-btn">You</button>
+  </header>
+
+  <!-- MAIN GAME AREA -->
+  <main>
+    <div id="game-display">
+      <h1 id="word-title">Word Challenge</h1>
+      <p id="game-instruction">Type words that start with the shown letter!</p>
+
+      <div id="game-area">
+        <h2 id="prompt">Letter: A</h2>
+        <p id="requirements">Min length: 3 • Time: 40s</p>
+
+        <input type="text" id="word-input" placeholder="Type your word..." autocomplete="off" />
+        <div style="margin-top:12px;">
+          <button id="submit-word">Submit</button>
+        </div>
+
+        <p id="feedback" aria-live="polite"></p>
+        <p id="timer">Time: 40s</p>
+        <p id="score">Score: 0</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER NAVIGATION -->
+  <footer>
+    <button id="home-btn" class="footer-btn">Home</button>
+    <button id="leaderboard-btn" class="footer-btn">Leaderboard</button>
+    <button id="tasks-btn" class="footer-btn">Tasks</button>
+    <button id="how-btn" class="footer-btn">How to Play</button>
+  </footer>
+
+  <!-- UNIVERSAL OVERLAY -->
+  <div id="overlay" class="overlay" aria-hidden="true" style="display:none;">
+    <div class="overlay-content">
+      <button id="overlay-close" class="close-btn">✕</button>
+      <h2 id="overlay-title"></h2>
+      <div id="overlay-body"></div>
+    </div>
+  </div>
+
+  <!-- START OVERLAY -->
+  <div id="start-overlay" class="start-overlay active" role="dialog" aria-modal="true">
+    <div class="start-content">
+      <h1>READY TO PLAY WRG?</h1>
+      <button id="start-btn">Start Game</button>
+    </div>
+  </div>
+
+  <!-- app script (non-module, loads after DOM because placed at bottom) -->
+  <script src="app.js"></script>
+</body>
+</html>

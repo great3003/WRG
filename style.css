@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+  --header-color: #FF6B6B;
+  --footer-color: #FFD93D;
+  --game-bg: #4ECDC4;
+  --background: #1A1A2E;
+  --text: #FFFFFF;
+  --glow1: #FF6B6B;
+  --glow2: #FFD93D;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+/* HEADER */
+header {
+  background-color: var(--header-color);
+  padding: 20px;
+  font-size: 2em;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  text-shadow: 0 0 15px var(--glow1);
+  animation: headerGlow 4s ease-in-out infinite;
+}
+
+@keyframes headerGlow {
+  0%, 100% { text-shadow: 0 0 10px var(--glow1); }
+  50% { text-shadow: 0 0 20px var(--glow2); }
+  100% { text-shadow: 0 0 10px var(--glow1); }
+}
+
+.you-btn {
+  background: linear-gradient(90deg, var(--glow1), var(--glow2));
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  position: relative;
+  z-index: 1;
+}
+
+#game-display {
+  background-color: var(--game-bg);
+  width: 80%;
+  max-width: 500px;
+  padding: 50px 20px;
+  border-radius: 25px;
+  box-shadow: 0 0 30px rgba(78, 205, 196, 0.8);
+  animation: pulse 3s infinite ease-in-out;
+  position: relative;
+  text-align: center;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 20px rgba(78, 205, 196, 0.5); }
+  50% { box-shadow: 0 0 40px rgba(255, 217, 61, 0.8); }
+  100% { box-shadow: 0 0 20px rgba(78, 205, 196, 0.5); }
+}
+
+footer {
+  background-color: var(--footer-color);
+  padding: 15px 10px;
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #1A1A2E;
+  box-shadow: 0 -4px 15px rgba(255, 217, 61, 0.4);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: space-around;
+  animation: footerPulse 3s infinite ease-in-out;
+}
+
+@keyframes footerPulse {
+  0%, 100% { background-color: var(--footer-color); }
+  50% { background-color: #FFE773; }
+}
+
+.footer-btn {
+  background: none;
+  border: none;
+  font-weight: bold;
+  color: #1A1A2E;
+  font-size: 1em;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.footer-btn:hover {
+  transform: scale(1.15);
+  color: var(--header-color);
+}
+
+#overlay,
+#start-overlay {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 160px);
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(10px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+  z-index: 100;
+}
+
+#start-overlay.active {
+  display: flex;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+#start-overlay.fade-out {
+  animation: fadeOut 2.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(1.05); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.05); }
+}
+
+button {
+  background: linear-gradient(90deg, var(--glow1), var(--glow2));
+  border: none;
+  border-radius: 12px;
+  padding: 15px 30px;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px var(--glow2);
+}
+
+#start-overlay h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px var(--glow2);
+  animation: titlePulse 2s infinite ease-in-out;
+}
+
+@keyframes titlePulse {
+  0%, 100% { text-shadow: 0 0 10px var(--glow2); }
+  50% { text-shadow: 0 0 25px var(--glow1); }
+}
+
+/* === YOU PROFILE OVERLAY === */
+.you-profile {
+  text-align: center;
+  padding: 16px;
+  animation: fadeIn 0.4s ease-in-out;
+}
+.you-pfp {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 12px rgba(255,255,255,0.2);
+  margin-bottom: 10px;
+}
+.you-stats {
+  margin-top: 10px;
+  font-size: 15px;
+}
+.you-stats p {
+  margin: 4px 0;
+}
