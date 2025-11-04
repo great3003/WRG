@@ -1,3 +1,11 @@
+ sounds.badge.play();
+    }
+
+    updateUI();
+  });
+})();
+
+
 // app.js — WRG Full Frontend Logic (Connected to Backend)
 (function () {
   document.addEventListener("DOMContentLoaded", () => {
@@ -20,9 +28,10 @@
     const feedbackEl = document.getElementById("feedback");
     const startOverlay = document.getElementById("start-overlay");
 
-    // === change this to your Render URL ===
+    // === Backend URL (replace with your Render backend URL) ===
     const API_BASE = "https://wrg-backend.onrender.com";
 
+    // === Sounds ===
     const sounds = {
       success: new Audio("sounds/success.mp3"),
       fail: new Audio("sounds/fail.mp3"),
@@ -31,6 +40,7 @@
       gameover: new Audio("sounds/gameover.mp3"),
     };
 
+    // === Game State ===
     let score = 0;
     let baseRoundTime = 40;
     let timeLeft = 40;
@@ -39,6 +49,7 @@
     let timerInterval = null;
     let user = null;
 
+    // === Utility ===
     function randomLetter() {
       const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       return letters[Math.floor(Math.random() * letters.length)];
@@ -72,7 +83,7 @@
       updateUI();
       timerInterval = setInterval(() => {
         timeLeft--;
-        sounds.tick.play();
+        if (timeLeft > 0) sounds.tick.play();
         updateUI();
         if (timeLeft <= 0) {
           clearInterval(timerInterval);
@@ -101,6 +112,7 @@
         </div>
       `
       );
+
       document.getElementById("restart-btn").addEventListener("click", () => {
         closeOverlayFn();
         startNewGame();
@@ -112,7 +124,6 @@
         window.open(shareUrl, "_blank");
       });
 
-      // Save score
       saveScore();
     }
 
@@ -126,11 +137,13 @@
       wordInput.focus();
     }
 
+    // === USER LOGIC ===
     async function verifyUser(fid) {
       const res = await fetch(`${API_BASE}/api/verifyUser/${fid}`);
       const data = await res.json();
       if (data.error) throw new Error("User not found");
       user = data;
+      localStorage.setItem("fid", fid);
       return data;
     }
 
@@ -157,10 +170,11 @@
       openOverlay("Home", `<p>Welcome back — ready to play?</p><button id="home-start">Start New Game</button>`);
       setTimeout(() => {
         const hs = document.getElementById("home-start");
-        if (hs) hs.addEventListener("click", () => {
-          closeOverlayFn();
-          startNewGame();
-        });
+        if (hs)
+          hs.addEventListener("click", () => {
+            closeOverlayFn();
+            startNewGame();
+          });
       }, 0);
     });
 
@@ -169,32 +183,55 @@
       try {
         const res = await fetch(`${API_BASE}/api/leaderboard`);
         const data = await res.json();
+
         if (!Array.isArray(data)) throw new Error("No leaderboard data");
-        const rows = data
-          .map((p, i) => `<li>#${i + 1} @${p.username} — ${p.total_score}</li>`)
+
+        const top100 = data.slice(0, 100);
+        const youFID = user?.fid || localStorage.getItem("fid");
+        const youRank = data.findIndex((p) => p.fid === Number(youFID)) + 1;
+        const youPlayer = data.find((p) => p.fid === Number(youFID));
+
+        let youBox = "";
+        if (youPlayer) {
+          youBox = `
+            <div style="padding:10px;background:#111;margin-bottom:10px;border-radius:8px;">
+              <strong>Your Rank:</strong> #${youRank || "Unranked"}<br/>
+              <strong>Your Score:</strong> ${youPlayer.weekly_score ?? 0}
+            </div>`;
+        }
+
+        const list = top100
+          .map(
+            (p, i) => `
+            <li>
+              <img src="${p.pfp || "https://i.imgur.com/VH1KXQy.png"}" style="width:30px;height:30px;border-radius:50%;margin-right:8px;">
+              #${i + 1} @${p.username} — ${p.weekly_score ?? 0}
+            </li>`
+          )
           .join("");
-        overlayBody.innerHTML = `<ol>${rows}</ol>`;
+
+        overlayBody.innerHTML = youBox + `<ol>${list}</ol>`;
       } catch (err) {
         overlayBody.innerHTML = `<p>Couldn't load leaderboard.</p>`;
       }
     });
 
     tasksBtn.addEventListener("click", () => {
-      const tasks = Array.from({ length: 10 }, (_, i) => `<li>Task ${i + 1}: Add task</li>`).join("");
+      const tasks = Array.from({ length: 5 }, (_, i) => `<li>Task ${i + 1}: Coming soon...</li>`).join("");
       openOverlay("Tasks", `<ul>${tasks}</ul>`);
     });
 
     howBtn.addEventListener("click", () => {
       openOverlay(
         "How to Play",
-        `<p>Type words starting with the shown letter. Longer words = more points. Time shortens each round.</p>`
+        `<p>Type words starting with the shown letter.<br>Longer words = more points.<br>Each round shortens your time!</p>`
       );
     });
 
     youBtn.addEventListener("click", async () => {
       openOverlay("Your Profile", "<p>Loading profile...</p>");
       try {
-        const fid = 2; // test fid
+        const fid = localStorage.getItem("fid") || 2; // Temporary FID (for demo)
         const data = await verifyUser(fid);
         const weeklyScore = score;
         const profileHTML = `
@@ -215,11 +252,14 @@
 
     overlayClose.addEventListener("click", closeOverlayFn);
 
+    // === Word Submission ===
     submitWord.addEventListener("click", async () => {
       const w = wordInput.value.trim().toLowerCase();
       if (!w) return (feedbackEl.textContent = "Type a word");
-      if (w[0].toUpperCase() !== currentLetter) return (feedbackEl.textContent = `Word must start with ${currentLetter}`);
-      if (w.length < requiredLength) return (feedbackEl.textContent = `Word must be at least ${requiredLength} letters`);
+      if (w[0].toUpperCase() !== currentLetter)
+        return (feedbackEl.textContent = `Word must start with ${currentLetter}`);
+      if (w.length < requiredLength)
+        return (feedbackEl.textContent = `Word must be at least ${requiredLength} letters`);
 
       const valid = await verifyWord(w);
       if (!valid) {
@@ -262,6 +302,7 @@
           score: weeklyScore,
           fid: user.fid,
           wallet: user.wallet,
+          price_usd: 0.03, // Badge mint price (USD)
         }),
       });
       if (res.ok) sounds.badge.play();
@@ -270,4 +311,3 @@
     updateUI();
   });
 })();
-
