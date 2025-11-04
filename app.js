@@ -1,11 +1,3 @@
- sounds.badge.play();
-    }
-
-    updateUI();
-  });
-})();
-
-
 // app.js — WRG Full Frontend Logic (Connected to Backend)
 (function () {
   document.addEventListener("DOMContentLoaded", () => {
