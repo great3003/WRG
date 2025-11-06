@@ -1,22 +1,18 @@
 {
-  "name": "WRG — Word Raid Game",
-  "description": "A fast-paced word challenge ⚡ Test your reflexes, earn badges, and climb the leaderboard!",
-  "icon": "https://wrg-rouge.vercel.app/assets/wrg.png",
-  "url": "https://wrg-rouge.vercel.app/",
-  "requested_permissions": ["account_identity"],
-  "developer": {
-    "name": "MR. FAVS",
-    "url": "https://farcaster.xyz/favsss"
+  "accountAssociation": {
+    "header": "eyJmaWQiOjE0MjgwNjEsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHhhNGE4ZDk3NTdDMWVkRTg4MjFEMjFhOUM5MzYwMzI5NmNENjc1Yjg2In0",
+    "payload": "eyJkb21haW4iOiJ3cmctc3diMS52ZXJjZWwuYXBwIn0",
+    "signature": "Bq4IzWp38jkUInEErAGOdYx+g+WIHQPKFDmA9KrzJOpnRyD0HoKyrtGYw1m4OJ1Dd7zo/UoxQEJ5oJbXBarB5Bw="
   },
-  "version": "1.0.0",
   "frame": {
-    "buttons": [
-      {
-        "label": "Play Now",
-        "action": "link",
-        "target": "https://wrg-rouge.vercel.app/"
-      }
-    ],
-    "image": "https://wrg-rouge.vercel.app/assets/wrg.png"
+    "version": "1",
+    "name": "WRG",
+    "iconUrl": "https://wrg-swb1.vercel.app/wrg.png",
+    "homeUrl": "https://wrg-swb1.vercel.app",
+    "imageUrl": "https://wrg-swb1.vercel.app/wrg.png",
+    "buttonTitle": "Open WRG",
+    "splashImageUrl": "https://wrg-swb1.vercel.app/wrg.png",
+    "splashBackgroundColor": "#eeccff",
+    "webhookUrl": "https://wrg-swb1.vercel.app/api/webhook"
   }
 }
