@@ -237,11 +237,16 @@
 
     overlayClose.addEventListener("click", closeOverlayFn);
 
-    // === Add Error Animation Function ===
+    // === Add Animations for Input ===
     function showInputError() {
       wordInput.classList.add("error");
       sounds.fail.play();
       setTimeout(() => wordInput.classList.remove("error"), 300);
+    }
+
+    function showInputSuccess() {
+      wordInput.classList.add("success");
+      setTimeout(() => wordInput.classList.remove("success"), 300);
     }
 
     // === Word Submission ===
@@ -273,6 +278,7 @@
       score += w.length * 10;
       feedbackEl.textContent = `✅ +${w.length * 10} points`;
       sounds.success.play();
+      showInputSuccess();
       nextRound();
       wordInput.value = "";
     });
