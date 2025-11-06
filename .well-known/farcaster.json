@@ -13,6 +13,6 @@
     "buttonTitle": "Open WRG",
     "splashImageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
     "splashBackgroundColor": "#eeccff",
-    "webhookUrl": "https://wrg-swb1.vercel.app/api/webhook"
+    "webhookUrl": "https://api.neynar.com/f/app/cdc2d0c3-e948-47bd-b915-7e3f1a32f685/event"
   }
 }
