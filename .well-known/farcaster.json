@@ -7,11 +7,11 @@
   "frame": {
     "version": "1",
     "name": "WRG",
-    "iconUrl": "https://wrg-swb1.vercel.app/wrg.png",
+    "iconUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
     "homeUrl": "https://wrg-swb1.vercel.app",
-    "imageUrl": "https://wrg-swb1.vercel.app/wrg.png",
+    "imageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
     "buttonTitle": "Open WRG",
-    "splashImageUrl": "https://wrg-swb1.vercel.app/wrg.png",
+    "splashImageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
     "splashBackgroundColor": "#eeccff",
     "webhookUrl": "https://wrg-swb1.vercel.app/api/webhook"
   }
