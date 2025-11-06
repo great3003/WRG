@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>WRG</title>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- ✅ Farcaster Mini App meta -->
+  <meta name="neynar:app_name" content="WRG" />
+  <meta name="neynar:app_version" content="1.0.0" />
+  <meta name="neynar:app_author" content="WRG Team" />
+  <meta name="neynar:app_description" content="Play WRG — the Farcaster word challenge game!" />
+  <meta name="neynar:app_url" content="https://your-render-url.onrender.com" /> <!-- Replace with your actual deployed link -->
+  <meta name="neynar:app_icon" content="https://files.catbox.moe/jrcpkr.jpeg" /> <!-- Replace with your logo if desired -->
+
+  <!-- ✅ Neynar SDK -->
+  <script src="https://cdn.neynar.com/js/farcaster.min.js"></script>
 </head>
 <body>
 
@@ -61,10 +72,21 @@
     </div>
   </div>
 
-  <!-- app script (non-module, loads after DOM because placed at bottom) -->
+  <!-- ✅ Farcaster SDK init (optional for testing) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      if (window.Farcaster) {
+        try {
+          const user = await window.Farcaster.user();
+          console.log("Connected Farcaster user:", user);
+        } catch (err) {
+          console.log("Farcaster SDK not available yet:", err);
+        }
+      }
+    });
+  </script>
+
+  <!-- app script -->
   <script src="app.js"></script>
 </body>
 </html>
-
-
-
