@@ -447,3 +447,43 @@ button:hover {
   25% { transform: translateX(-3px); }
   75% { transform: translateX(3px); }
 }
+
+/* === ✨ Improved Input & Button Feedback === */
+#word-input {
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+/* Success (green flash) */
+.success {
+  border: 2px solid #4dff88 !important;
+  box-shadow: 0 0 10px rgba(77, 255, 136, 0.6) !important;
+  animation: glow 0.3s;
+}
+
+/* Add a subtle pulse for success */
+@keyframes glow {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+/* Smooth input hover */
+#word-input:hover {
+  box-shadow: 0 0 8px rgba(255, 217, 61, 0.4);
+}
+
+/* === Submit Button Glow === */
+#submit-word {
+  transition: all 0.25s ease;
+}
+
+#submit-word.success {
+  background: linear-gradient(135deg, #3adb76, #2ecc71);
+  box-shadow: 0 0 12px rgba(61, 255, 122, 0.6);
+}
+
+#submit-word.error {
+  background: linear-gradient(135deg, #ff4d4d, #e60000);
+  box-shadow: 0 0 12px rgba(255, 77, 77, 0.6);
+}
