@@ -1,0 +1,22 @@
+{
+  "name": "WRG — Word Raid Game",
+  "description": "A fast-paced word challenge ⚡ Test your reflexes, earn badges, and climb the leaderboard!",
+  "icon": "https://wrg-rouge.vercel.app/assets/wrg.png",
+  "url": "https://wrg-rouge.vercel.app/",
+  "requested_permissions": ["account_identity"],
+  "developer": {
+    "name": "MR. FAVS",
+    "url": "https://farcaster.xyz/favsss"
+  },
+  "version": "1.0.0",
+  "frame": {
+    "buttons": [
+      {
+        "label": "Play Now",
+        "action": "link",
+        "target": "https://wrg-rouge.vercel.app/"
+      }
+    ],
+    "image": "https://wrg-rouge.vercel.app/assets/wrg.png"
+  }
+}
