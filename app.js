@@ -20,10 +20,8 @@
     const feedbackEl = document.getElementById("feedback");
     const startOverlay = document.getElementById("start-overlay");
 
-    // === Backend URL (replace with your Render backend URL) ===
     const API_BASE = "https://wrg-backend.onrender.com";
 
-    // === Sounds ===
     const sounds = {
       success: new Audio("sounds/success.mp3"),
       fail: new Audio("sounds/fail.mp3"),
@@ -32,7 +30,6 @@
       gameover: new Audio("sounds/gameover.mp3"),
     };
 
-    // === Game State ===
     let score = 0;
     let baseRoundTime = 40;
     let timeLeft = 40;
@@ -41,7 +38,6 @@
     let timerInterval = null;
     let user = null;
 
-    // === Utility ===
     function randomLetter() {
       const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       return letters[Math.floor(Math.random() * letters.length)];
@@ -68,7 +64,6 @@
       overlayBody.innerHTML = "";
     }
 
-    // === TIMER ===
     function startTimer() {
       clearInterval(timerInterval);
       timeLeft = baseRoundTime;
@@ -129,7 +124,6 @@
       wordInput.focus();
     }
 
-    // === USER LOGIC ===
     async function verifyUser(fid) {
       const res = await fetch(`${API_BASE}/api/verifyUser/${fid}`);
       const data = await res.json();
@@ -152,7 +146,6 @@
       });
     }
 
-    // === BUTTONS ===
     startBtn.addEventListener("click", () => {
       startOverlay.style.display = "none";
       startNewGame();
@@ -244,19 +237,36 @@
 
     overlayClose.addEventListener("click", closeOverlayFn);
 
+    // === Add Error Animation Function ===
+    function showInputError() {
+      wordInput.classList.add("error");
+      sounds.fail.play();
+      setTimeout(() => wordInput.classList.remove("error"), 300);
+    }
+
     // === Word Submission ===
     submitWord.addEventListener("click", async () => {
       const w = wordInput.value.trim().toLowerCase();
-      if (!w) return (feedbackEl.textContent = "Type a word");
-      if (w[0].toUpperCase() !== currentLetter)
-        return (feedbackEl.textContent = `Word must start with ${currentLetter}`);
-      if (w.length < requiredLength)
-        return (feedbackEl.textContent = `Word must be at least ${requiredLength} letters`);
+      if (!w) {
+        feedbackEl.textContent = "Type a word";
+        showInputError();
+        return;
+      }
+      if (w[0].toUpperCase() !== currentLetter) {
+        feedbackEl.textContent = `Word must start with ${currentLetter}`;
+        showInputError();
+        return;
+      }
+      if (w.length < requiredLength) {
+        feedbackEl.textContent = `Word must be at least ${requiredLength} letters`;
+        showInputError();
+        return;
+      }
 
       const valid = await verifyWord(w);
       if (!valid) {
         feedbackEl.textContent = "Not a valid word!";
-        sounds.fail.play();
+        showInputError();
         return;
       }
 
@@ -294,7 +304,7 @@
           score: weeklyScore,
           fid: user.fid,
           wallet: user.wallet,
-          price_usd: 0.03, // Badge mint price (USD)
+          price_usd: 0.03,
         }),
       });
       if (res.ok) sounds.badge.play();
