@@ -31,22 +31,21 @@
     };
 
     document.addEventListener("DOMContentLoaded", async () => {
-  console.log("⏳ Checking for Farcaster SDK...");
-  if (window.Farcaster) {
-    console.log("✅ Farcaster SDK detected");
+      console.log("⏳ Checking for Farcaster SDK...");
+      if (window.Farcaster) {
+        console.log("✅ Farcaster SDK detected");
+        try {
+          const user = await window.Farcaster.user();
+          console.log("👤 User fetched:", user);
+          alert(`Welcome ${user.display_name || user.username || "Player"}`);
+        } catch (err) {
+          console.error("❌ Could not fetch Farcaster user:", err);
+        }
+      } else {
+        console.error("❌ Farcaster SDK not loaded");
+      }
+    });
 
-    try {
-      const user = await window.Farcaster.user();
-      console.log("👤 User fetched:", user);
-      alert(`Welcome ${user.display_name || user.username || "Player"}`);
-    } catch (err) {
-      console.error("❌ Could not fetch Farcaster user:", err);
-    }
-  } else {
-    console.error("❌ Farcaster SDK not loaded");
-  }
-});
-    
     let score = 0;
     let baseRoundTime = 40;
     let timeLeft = 40;
@@ -163,23 +162,7 @@
       });
     }
 
-    startBtn.addEventListener("click", () => {
-      startOverlay.style.display = "none";
-      startNewGame();
-    });
-
-    homeBtn.addEventListener("click", () => {
-      openOverlay("Home", `<p>Welcome back — ready to play?</p><button id="home-start">Start New Game</button>`);
-      setTimeout(() => {
-        const hs = document.getElementById("home-start");
-        if (hs)
-          hs.addEventListener("click", () => {
-            closeOverlayFn();
-            startNewGame();
-          });
-      }, 0);
-    });
-
+    // 🏆 UPDATED LEADERBOARD SECTION
     leaderboardBtn.addEventListener("click", async () => {
       openOverlay("Leaderboard", "<p>Loading leaderboard...</p>");
       try {
@@ -196,26 +179,53 @@
         let youBox = "";
         if (youPlayer) {
           youBox = `
-            <div style="padding:10px;background:#111;margin-bottom:10px;border-radius:8px;">
+            <div style="padding:10px;background:#222;margin-bottom:10px;border-radius:8px;color:#fff;">
               <strong>Your Rank:</strong> #${youRank || "Unranked"}<br/>
-              <strong>Your Score:</strong> ${youPlayer.weekly_score ?? 0}
+              <strong>Your Score:</strong> ${youPlayer.weekly_score ?? 0}<br/>
+              <strong>Your Badge:</strong> ${youPlayer.badge_name || "Wood I"}
             </div>`;
         }
 
         const list = top100
-          .map(
-            (p, i) => `
-            <li>
-              <img src="${p.pfp || "https://i.imgur.com/VH1KXQy.png"}" style="width:30px;height:30px;border-radius:50%;margin-right:8px;">
-              #${i + 1} @${p.username} — ${p.weekly_score ?? 0}
-            </li>`
-          )
+          .map((p, i) => {
+            const badgeName = p.badge_name || "Wood I";
+            const badgeBase = badgeName.split(" ")[0].toLowerCase(); // e.g. gold
+            const badgeImg = `/assets/${badgeBase}.png`; // All tiers use same image
+
+            return `
+              <div class="lb-card">
+                <span class="lb-rank">#${i + 1}</span>
+                <img src="${p.pfp || "https://i.imgur.com/VH1KXQy.png"}" class="lb-pfp">
+                <div class="lb-info">
+                  <h3>@${p.username}</h3>
+                  <p>${badgeName}</p>
+                </div>
+                <img src="${badgeImg}" class="lb-badge">
+              </div>`;
+          })
           .join("");
 
-        overlayBody.innerHTML = youBox + `<ol>${list}</ol>`;
+        overlayBody.innerHTML = `
+          ${youBox}
+          <div class="leaderboard-wrapper">${list}</div>
+        `;
       } catch (err) {
         overlayBody.innerHTML = `<p>Couldn't load leaderboard.</p>`;
       }
+    });
+
+    // === END LEADERBOARD ===
+
+    homeBtn.addEventListener("click", () => {
+      openOverlay("Home", `<p>Welcome back — ready to play?</p><button id="home-start">Start New Game</button>`);
+      setTimeout(() => {
+        const hs = document.getElementById("home-start");
+        if (hs)
+          hs.addEventListener("click", () => {
+            closeOverlayFn();
+            startNewGame();
+          });
+      }, 0);
     });
 
     tasksBtn.addEventListener("click", () => {
@@ -233,7 +243,7 @@
     youBtn.addEventListener("click", async () => {
       openOverlay("Your Profile", "<p>Loading profile...</p>");
       try {
-        const fid = localStorage.getItem("fid") || 2; // Temporary FID (for demo)
+        const fid = localStorage.getItem("fid") || 2;
         const data = await verifyUser(fid);
         const weeklyScore = score;
         const profileHTML = `
@@ -254,7 +264,6 @@
 
     overlayClose.addEventListener("click", closeOverlayFn);
 
-    // === Add Animations for Input ===
     function showInputError() {
       wordInput.classList.add("error");
       sounds.fail.play();
@@ -266,7 +275,6 @@
       setTimeout(() => wordInput.classList.remove("success"), 300);
     }
 
-    // === Word Submission ===
     submitWord.addEventListener("click", async () => {
       const w = wordInput.value.trim().toLowerCase();
       if (!w) {
@@ -311,14 +319,38 @@
 
     async function checkAndMintBadge(weeklyScore, user) {
       const badgeMilestones = [
-        { score: 50, badge: "Bronze Wordsmith" },
-        { score: 150, badge: "Silver Wordsmith" },
-        { score: 300, badge: "Gold Wordsmith" },
-        { score: 600, badge: "Platinum Wordsmith" },
-        { score: 1000, badge: "Diamond Wordsmith" },
+        { score: 1000, badge: "Wood I" },
+        { score: 2000, badge: "Wood II" },
+        { score: 3000, badge: "Wood III" },
+        { score: 4500, badge: "Iron I" },
+        { score: 6000, badge: "Iron II" },
+        { score: 7500, badge: "Iron III" },
+        { score: 10000, badge: "Bronze I" },
+        { score: 12000, badge: "Bronze II" },
+        { score: 14000, badge: "Bronze III" },
+        { score: 17000, badge: "Silver I" },
+        { score: 19000, badge: "Silver II" },
+        { score: 21000, badge: "Silver III" },
+        { score: 24000, badge: "Gold I" },
+        { score: 27000, badge: "Gold II" },
+        { score: 30000, badge: "Gold III" },
+        { score: 32000, badge: "Platinum I" },
+        { score: 36000, badge: "Platinum II" },
+        { score: 40000, badge: "Platinum III" },
+        { score: 44000, badge: "Diamond I" },
+        { score: 52000, badge: "Diamond II" },
+        { score: 60000, badge: "Diamond III" },
+        { score: 70000, badge: "Master I" },
+        { score: 80000, badge: "Master II" },
+        { score: 90000, badge: "Master III" },
+        { score: 100000, badge: "Grandmaster I" },
+        { score: 130000, badge: "Grandmaster II" },
+        { score: 150000, badge: "Grandmaster III" },
       ];
+
       const earned = badgeMilestones.filter((b) => weeklyScore >= b.score).pop();
       if (!earned) return;
+
       const res = await fetch(`${API_BASE}/api/mintBadge`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -336,4 +368,3 @@
     updateUI();
   });
 })();
-
