@@ -487,3 +487,114 @@ button:hover {
   background: linear-gradient(135deg, #ff4d4d, #e60000);
   box-shadow: 0 0 12px rgba(255, 77, 77, 0.6);
 }
+
+/* ===== LEADERBOARD STYLES ===== */
+
+#leaderboard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Each player row */
+.player {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #111, #1c1c1c 50%, #111);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 10px 16px;
+  color: #fff;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.player:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+/* Left side (rank, pfp, username) */
+.player-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.player-rank {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #00ffff;
+  width: 35px;
+  text-align: right;
+}
+
+.player-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #00ffff;
+  object-fit: cover;
+}
+
+.player-name {
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+}
+
+/* Divider (the "I" in the middle) */
+.divider {
+  width: 3px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+/* Right side (badge + image) */
+.player-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+
+.badge-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Personal rank (optional area for “you”) */
+#my-rank {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #222;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+#my-rank img.me-pfp {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #00ffff;
+}
+
+/* Countdown text */
+#reset-countdown {
+  text-align: center;
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-top: 15px;
+}
