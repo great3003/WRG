@@ -598,3 +598,92 @@ button:hover {
   font-size: 0.9rem;
   margin-top: 15px;
 }
+
+/* ===== MOBILE RESPONSIVE ===== */
+
+@media (max-width: 600px) {
+  #leaderboard {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .player {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-radius: 16px;
+    box-shadow: 0 0 6px rgba(0, 255, 255, 0.15);
+  }
+
+  .player-left {
+    gap: 6px;
+  }
+
+  .player-rank {
+    font-size: 0.9rem;
+    width: 28px;
+  }
+
+  .player-img {
+    width: 32px;
+    height: 32px;
+    border-width: 1.5px;
+  }
+
+  .player-name {
+    font-size: 0.85rem;
+  }
+
+  .divider {
+    height: 25px;
+    width: 2px;
+  }
+
+  .player-right {
+    font-size: 0.8rem;
+    gap: 5px;
+  }
+
+  .badge-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  #my-rank {
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+
+  #my-rank img.me-pfp {
+    width: 35px;
+    height: 35px;
+  }
+
+  #reset-countdown {
+    font-size: 0.8rem;
+  }
+}
+
+/* ===== SUPER SMALL SCREENS (Mini Apps <400px) ===== */
+@media (max-width: 400px) {
+  .player {
+    padding: 6px 8px;
+  }
+
+  .player-rank {
+    font-size: 0.8rem;
+  }
+
+  .player-name {
+    font-size: 0.8rem;
+  }
+
+  .player-right {
+    font-size: 0.75rem;
+  }
+
+  .badge-icon {
+    width: 25px;
+    height: 25px;
+  }
+}
