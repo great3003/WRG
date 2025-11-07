@@ -23,7 +23,7 @@ async function fetchLeaderboard() {
   }
 }
 
-// Display leaderboard (new design)
+// Display leaderboard (new WRG design)
 function displayLeaderboard(players) {
   const container = document.getElementById("leaderboard");
   container.innerHTML = "";
@@ -38,7 +38,12 @@ function displayLeaderboard(players) {
     const card = document.createElement("div");
     card.className = "player";
 
-    // determine badge name & image
+    // Top 3 highlight classes
+    if (index === 0) card.classList.add("top-1");
+    else if (index === 1) card.classList.add("top-2");
+    else if (index === 2) card.classList.add("top-3");
+
+    // Determine badge name & image (lowercase file)
     const badgeName = player.badge_name || "Wood I";
     const badgeImg = `/assets/${badgeName.toLowerCase().replace(/\s+/g, '')}.png`;
 
@@ -46,11 +51,11 @@ function displayLeaderboard(players) {
       <div class="player-left">
         <span class="player-rank">${rank}.</span>
         <img src="${player.pfp || '/assets/default.png'}" class="player-img" alt="${player.username}">
-        <span class="player-name">${player.username || "Unknown"}</span>
+        <span class="player-name">@${player.username || "Unknown"}</span>
       </div>
       <div class="divider"></div>
       <div class="player-right">
-        <span>${badgeName}</span>
+        <span class="badge-text">${badgeName}</span>
         <img src="${badgeImg}" class="badge-icon" alt="${badgeName}">
       </div>
     `;
