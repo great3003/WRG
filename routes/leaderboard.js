@@ -1,4 +1,4 @@
-const API_BASE = "https://your-backend-url.onrender.com/api"; // ← change this
+const API_BASE = "https://wrg-backend.onrender.com"; // ← change this
 
 // Helper: rank suffix (1st, 2nd, 3rd, etc.)
 function rankSuffix(rank) {
