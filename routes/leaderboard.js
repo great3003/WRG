@@ -1,23 +1,20 @@
+const API_BASE = "https://your-backend-url.onrender.com/api"; // ← change this
 
-const API_BASE = "https://your-backend-url.onrender.com/api"; // ← change to your Render backend URL
-
-// Helper: Format rank number with suffix (1st, 2nd, 3rd, etc.)
+// Helper: rank suffix (1st, 2nd, 3rd, etc.)
 function rankSuffix(rank) {
-  const j = rank % 10,
-    k = rank % 100;
+  const j = rank % 10, k = rank % 100;
   if (j === 1 && k !== 11) return `${rank}st`;
   if (j === 2 && k !== 12) return `${rank}nd`;
   if (j === 3 && k !== 13) return `${rank}rd`;
   return `${rank}th`;
 }
-ll
+
 // Fetch leaderboard from backend
 async function fetchLeaderboard() {
   try {
     const res = await fetch(`${API_BASE}/leaderboard`);
     if (!res.ok) throw new Error("Failed to load leaderboard");
     const players = await res.json();
-
     displayLeaderboard(players);
   } catch (err) {
     console.error("Leaderboard load error:", err);
@@ -26,7 +23,7 @@ async function fetchLeaderboard() {
   }
 }
 
-// Display leaderboard
+// Display leaderboard (new design)
 function displayLeaderboard(players) {
   const container = document.getElementById("leaderboard");
   container.innerHTML = "";
@@ -36,19 +33,25 @@ function displayLeaderboard(players) {
     return;
   }
 
-  players.forEach((player, index) => {
+  players.slice(0, 100).forEach((player, index) => {
     const rank = index + 1;
-    const rankLabel = rankSuffix(rank);
     const card = document.createElement("div");
-    card.className = "player-card";
+    card.className = "player";
+
+    // determine badge name & image
+    const badgeName = player.badge_name || "Wood I";
+    const badgeImg = `/assets/${badgeName.toLowerCase().replace(/\s+/g, '')}.png`;
 
     card.innerHTML = `
-      <div class="player-rank">${rankLabel}</div>
-      <img src="${player.pfp || 'default-pfp.png'}" alt="${player.username}" class="player-pfp">
-      <div class="player-info">
-        <h3>@${player.username}</h3>
-        <p>Weekly Score: <strong>${player.weekly_score ?? 0}</strong></p>
-        <p>Total Score: ${player.total_score ?? 0}</p>
+      <div class="player-left">
+        <span class="player-rank">${rank}.</span>
+        <img src="${player.pfp || '/assets/default.png'}" class="player-img" alt="${player.username}">
+        <span class="player-name">${player.username || "Unknown"}</span>
+      </div>
+      <div class="divider"></div>
+      <div class="player-right">
+        <span>${badgeName}</span>
+        <img src="${badgeImg}" class="badge-icon" alt="${badgeName}">
       </div>
     `;
 
@@ -56,7 +59,7 @@ function displayLeaderboard(players) {
   });
 }
 
-// Fetch and show player’s personal rank
+// Fetch and show personal rank (optional)
 async function fetchMyRank(fid) {
   try {
     const res = await fetch(`${API_BASE}/player/${fid}`);
@@ -77,7 +80,7 @@ async function fetchMyRank(fid) {
   }
 }
 
-// Show “days left till reset” countdown
+// Weekly reset countdown
 function showCountdown() {
   const now = new Date();
   const nextMonday = new Date();
@@ -86,7 +89,7 @@ function showCountdown() {
 
   const diffDays = Math.ceil((nextMonday - now) / (1000 * 60 * 60 * 24));
   document.getElementById("reset-countdown").innerText =
-    `⏳ ${diffDays} day${diffDays > 1 ? "s" : ""} left till leaderboard reset`;
+    `⏳ ${diffDays} day${diffDays > 1 ? "s" : ""} till reset`;
 }
 
 // Initialize
@@ -94,7 +97,6 @@ window.addEventListener("DOMContentLoaded", () => {
   fetchLeaderboard();
   showCountdown();
 
-  // If you have the logged-in user’s FID saved (example from your game logic)
   const fid = localStorage.getItem("fid");
   if (fid) fetchMyRank(fid);
 });
