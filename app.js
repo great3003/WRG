@@ -235,7 +235,7 @@ howBtn.addEventListener("click", () => {
 youBtn.addEventListener("click", async () => {  
   openOverlay("Your Profile", "<p>Loading profile...</p>");  
   try {  
-    const fid = localStorage.getItem("fid") || 2; // Temporary FID (for demo)  
+    const fid = localStorage.getItem("fid") || 1428061; // Temporary FID (for demo)  
     const data = await verifyUser(fid);  
     const weeklyScore = score;  
     const profileHTML = `  
@@ -339,3 +339,4 @@ updateUI();
 
 });
 })();
+
