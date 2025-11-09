@@ -4,7 +4,7 @@
     "payload": "eyJkb21haW4iOiJ3cmctc3diMS52ZXJjZWwuYXBwIn0",
     "signature": "Bq4IzWp38jkUInEErAGOdYx+g+WIHQPKFDmA9KrzJOpnRyD0HoKyrtGYw1m4OJ1Dd7zo/UoxQEJ5oJbXBarB5Bw="
   },
-  "frame": {
+  "miniapp": {
     "version": "1",
     "name": "WRG",
     "iconUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
@@ -13,6 +13,21 @@
     "buttonTitle": "Open WRG",
     "splashImageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
     "splashBackgroundColor": "#eeccff",
-    "webhookUrl": "https://api.neynar.com/f/app/cdc2d0c3-e948-47bd-b915-7e3f1a32f685/event"
+    "webhookUrl": "https://api.neynar.com/f/app/cdc2d0c3-e948-47bd-b915-7e3f1a32f685/event",
+    "subtitle": "Words random game"
+    "description": "Test your knowledge and earn while at it"
+
+    "primaryCategory": "Games",
+    "tags": [
+      "words",
+      "wrg",
+      "warpcast",
+      "earn"
+    ],
+    "heroImageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
+    "tagline": "Words game",
+    "ogTitle": "Words",
+    "ogDescription": "Climb the leaderboard and earn rewards by playing and ranking up.",
+    "ogImageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png"
   }
 }
