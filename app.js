@@ -1,4 +1,3 @@
-// app.js — WRG Full Frontend Logic (Connected to Backend)
 (function () {
 document.addEventListener("DOMContentLoaded", () => {
 const startBtn = document.getElementById("start-btn");
@@ -74,6 +73,13 @@ function openOverlay(title, html) {
   overlayBody.innerHTML = html;  
   overlay.style.display = "flex";  
   overlay.setAttribute("aria-hidden", "false");  
+  
+  const closeBtn = document.getElementById("overlay-close");
+  if (options.hideClose) {
+    closeBtn.style.display = "none";
+  } else {
+    closeBtn.style.display = "block";
+  }
 }  
 
 function closeOverlayFn() {  
@@ -125,7 +131,8 @@ function endGame() {
   });  
 
   document.getElementById("share-btn").addEventListener("click", () => {  
-    const shareText = `I just scored ${score} points on WRG ⚡ Can you beat me?`;  
+    const shareText = `I just scored ${score} points on WRG ⚡ Can you beat me?
+    (miniapp link here)`;  
     const shareUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}`;  
     window.open(shareUrl, "_blank");  
   });  
@@ -171,7 +178,7 @@ startBtn.addEventListener("click", () => {
 });  
 
 homeBtn.addEventListener("click", () => {  
-  openOverlay("Home", `<p>Welcome back — ready to play?</p><button id="home-start">Start New Game</button>`);  
+  openOverlay("Home", `<p>Welcome back — ready to play?</p><button id="home-start">Start New Game</button>`, { hideClose: true});  
   setTimeout(() => {  
     const hs = document.getElementById("home-start");  
     if (hs)  
@@ -228,14 +235,14 @@ tasksBtn.addEventListener("click", () => {
 howBtn.addEventListener("click", () => {  
   openOverlay(  
     "How to Play",  
-    `<p>Type words starting with the shown letter.<br>Longer words = more points.<br>Each round shortens your time!</p>`  
+    `<p>Type words starting with the shown letter.<br>Longer words = more points.<br>Each round shortens your time!<br>Reward pool coming soon!!</p>`  
   );  
 });  
 
 youBtn.addEventListener("click", async () => {  
   openOverlay("Your Profile", "<p>Loading profile...</p>");  
   try {  
-    const fid = localStorage.getItem("fid") || 1428061; // Temporary FID (for demo)  
+    const fid = localStorage.getItem("fid") || 1428061;
     const data = await verifyUser(fid);  
     const weeklyScore = score;  
     const profileHTML = `  
@@ -256,7 +263,6 @@ youBtn.addEventListener("click", async () => {
 
 overlayClose.addEventListener("click", closeOverlayFn);  
 
-// === Add Animations for Input ===  
 function showInputError() {  
   wordInput.classList.add("error");  
   sounds.fail.play();  
@@ -268,7 +274,6 @@ function showInputSuccess() {
   setTimeout(() => wordInput.classList.remove("success"), 300);  
 }  
 
-// === Word Submission ===  
 submitWord.addEventListener("click", async () => {  
   const w = wordInput.value.trim().toLowerCase();  
   if (!w) {  
@@ -313,11 +318,33 @@ async function verifyWord(word) {
 
 async function checkAndMintBadge(weeklyScore, user) {  
   const badgeMilestones = [  
-    { score: 50, badge: "Bronze Wordsmith" },  
-    { score: 150, badge: "Silver Wordsmith" },  
-    { score: 300, badge: "Gold Wordsmith" },  
-    { score: 600, badge: "Platinum Wordsmith" },  
-    { score: 1000, badge: "Diamond Wordsmith" },  
+    { score: 1000, badge: "Wood I" },
+    { score: 2000, badge: "Wood II" },
+    { score: 3000, badge: "Wood III" },
+    { score: 4500, badge: "Iron I" },
+    { score: 6000, badge: "Iron II" },
+    { score: 7500, badge: "Iron III" },
+    { score: 10000, badge: "Bronze I" },
+    { score: 12000, badge: "Bronze II" },
+    { score: 14000, badge: "Bronze III" },
+    { score: 17000, badge: "Silver I" },
+    { score: 19000, badge: "Silver II" },
+    { score: 21000, badge: "Silver III" },
+    { score: 24000, badge: "Gold I" },
+    { score: 27000, badge: "Gold II" },
+    { score: 30000, badge: "Gold III" },
+    { score: 32000, badge: "Platinum I" },
+    { score: 36000, badge: "Platinum II" },
+    { score: 40000, badge: "Platinum III" },
+    { score: 44000, badge: "Diamond I" },
+    { score: 52000, badge: "Diamond II" },
+    { score: 60000, badge: "Diamond III" },
+    { score: 70000, badge: "Master I" },
+    { score: 80000, badge: "Master II" },
+    { score: 90000, badge: "Master III" },
+    { score: 100000, badge: "Grandmaster I" },
+    { score: 130000, badge: "Grandmaster II" },
+    { score: 150000, badge: "Grandmaster III" },  
   ];  
   const earned = badgeMilestones.filter((b) => weeklyScore >= b.score).pop();  
   if (!earned) return;  
@@ -339,4 +366,3 @@ updateUI();
 
 });
 })();
-
