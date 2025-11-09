@@ -13,7 +13,7 @@
     "buttonTitle": "Open mini app",
     "splashImageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
     "splashBackgroundColor": "#eeccff",
-    "webhookUrl": "https://https://wrg-swb1.vercel.app/api/webhook",
+    "webhookUrl": "https://wrg-swb1.vercel.app/api/webhook",
     "subtitle": "Connect and share ",
     "description": "Play, test your knowledge and rank the leaderboard",
     "primaryCategory": "games",
