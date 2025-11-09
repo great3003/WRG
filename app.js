@@ -29,37 +29,19 @@ const sounds = {
   gameover: new Audio("sounds/gameover.mp3"),  
 };  
 
-// Farcaster Mini App Integration for HTML/JS sites
-document.addEventListener("DOMContentLoaded", async () => {
-  try {
-    // Initialize SDK
-    const sdk = new window.FarcasterMiniAppSDK();
+import { sdk } from '@farcaster/miniapp-sdk'
 
-    // Wait until SDK is ready
-    await sdk.actions.ready();
+// Wait until the DOM is ready
+window.addEventListener('DOMContentLoaded', async () => {
+  console.log('DOM fully loaded.')
 
-    // Detect if opened inside Farcaster
-    const isMiniApp = await sdk.isInMiniApp();
-    console.log("Running inside Farcaster Mini App:", isMiniApp);
+  // Simulate loading or setup tasks (optional)
+  await new Promise(resolve => setTimeout(resolve, 1000))
 
-    if (isMiniApp) {
-      // Get user + app context
-      const context = await sdk.context.get();
-      console.log("Farcaster context:", context);
-
-      // Example: greet the user
-      const userBox = document.createElement("div");
-      userBox.style.cssText =
-        "padding:15px;background:#111;color:#0f0;border-radius:10px;margin:10px 0;font-family:monospace;";
-      userBox.textContent = `👋 Hi ${context.user?.username || "Farcaster user"}!`;
-      document.body.prepend(userBox);
-    } else {
-      console.log("Not running inside Farcaster — normal web mode.");
-    }
-  } catch (err) {
-    console.error("Mini App init failed:", err);
-  }
-});
+  // Tell Farcaster that your app is ready to display
+  await sdk.actions.ready()
+  console.log('Mini app is ready!')
+})
 
 let score = 0;  
 let baseRoundTime = 40;  
@@ -379,4 +361,5 @@ updateUI();
 
 });
 })();
+
 
