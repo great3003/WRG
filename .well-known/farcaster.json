@@ -4,7 +4,7 @@
     "payload": "eyJkb21haW4iOiJ3cmctc3diMS52ZXJjZWwuYXBwIn0",
     "signature": "Bq4IzWp38jkUInEErAGOdYx+g+WIHQPKFDmA9KrzJOpnRyD0HoKyrtGYw1m4OJ1Dd7zo/UoxQEJ5oJbXBarB5Bw="
   },
-  "frame": {
+  "miniapp": {
     "version": "1",
     "name": "WRG",
     "iconUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
