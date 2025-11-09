@@ -63,19 +63,25 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      if (window.Farcaster) {
-        try {
-          const user = await window.Farcaster.user();
-          console.log("Connected Farcaster user:", user);
-        } catch (err) {
-          console.log("Farcaster SDK not available yet:", err);
-        }
+  document.addEventListener("DOMContentLoaded", async () => {
+    if (window.Farcaster) {
+      try {
+        const user = await window.Farcaster.user();
+        console.log("Connected Farcaster user:", user);
+      } catch (err) {
+        console.log("Farcaster SDK not available yet:", err);
       }
-    });
-  </script>
+
+      // ✅ Tell Farcaster the Mini App is fully ready
+      window.Farcaster.ready();
+    } else {
+      console.warn("Farcaster SDK not found on window.");
+    }
+  });
+</script>
 </body>
 </html>
+
 
 
 
