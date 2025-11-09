@@ -10,23 +10,6 @@
   <meta name="fc:frame" content='{"version":"1","imageUrl":"https://wrg-swb1.vercel.app/assets/wrg.png","button":{"title":Start","action":{"type":"launch_frame","name":"WRG!","url":"https://wrg-swb1.vercel.app","splashImageUrl":"https://wrg-swb1.vercel.app/assets/wrg.png","splashBackgroundColor":"#eeccff"}}}' />
   <script src="app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@farcaster/miniapp-sdk/dist/browser.min.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", async () => {
-    try {
-      const sdk = window.Farcaster;
-
-      // (Optional) Get user info if logged in
-      const user = await sdk.user();
-      console.log("Connected user:", user);
-
-      // ✅ Notify Farcaster the Mini App is ready
-      await sdk.actions.ready();
-      console.log("SDK ready!");
-    } catch (err) {
-      console.error("Error initializing SDK:", err);
-    }
-  });
-</script>
  </head>
 <body>
 
@@ -79,6 +62,7 @@
   </div>
 </body>
 </html>
+
 
 
 
