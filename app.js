@@ -29,23 +29,36 @@ const sounds = {
   gameover: new Audio("sounds/gameover.mp3"),  
 };  
 
+// Farcaster Mini App Integration for HTML/JS sites
 document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    // Initialize SDK
+    const sdk = new window.FarcasterMiniAppSDK();
 
-console.log("⏳ Checking for Farcaster SDK...");
-if (window.Farcaster) {
-console.log("✅ Farcaster SDK detected");
+    // Wait until SDK is ready
+    await sdk.actions.ready();
 
-try {  
-  const user = await window.Farcaster.user();  
-  console.log("👤 User fetched:", user);  
-  alert(`Welcome ${user.display_name || user.username || "Player"}`);  
-} catch (err) {  
-  console.error("❌ Could not fetch Farcaster user:", err);  
-}
+    // Detect if opened inside Farcaster
+    const isMiniApp = await sdk.isInMiniApp();
+    console.log("Running inside Farcaster Mini App:", isMiniApp);
 
-} else {
-console.error("❌ Farcaster SDK not loaded");
-}
+    if (isMiniApp) {
+      // Get user + app context
+      const context = await sdk.context.get();
+      console.log("Farcaster context:", context);
+
+      // Example: greet the user
+      const userBox = document.createElement("div");
+      userBox.style.cssText =
+        "padding:15px;background:#111;color:#0f0;border-radius:10px;margin:10px 0;font-family:monospace;";
+      userBox.textContent = `👋 Hi ${context.user?.username || "Farcaster user"}!`;
+      document.body.prepend(userBox);
+    } else {
+      console.log("Not running inside Farcaster — normal web mode.");
+    }
+  } catch (err) {
+    console.error("Mini App init failed:", err);
+  }
 });
 
 let score = 0;  
@@ -366,3 +379,4 @@ updateUI();
 
 });
 })();
+
