@@ -6,26 +6,22 @@
   <title>WRG</title>
   <link rel="stylesheet" href="style.css" />
 
-  <!-- ✅ Farcaster Mini App meta -->
   <meta name="neynar:app_name" content="WRG" />
   <meta name="neynar:app_version" content="1.0.0" />
   <meta name="neynar:app_author" content="Dexile" />
   <meta name="neynar:app_description" content="Play WRG — the Farcaster word challenge game!" />
-  <meta name="neynar:app_url" content="https://wrg-backend.onrender.com" /> <!-- Replace with your actual deployed link -->
-  <meta name="neynar:app_icon" content="https://wrg-swb1.vercel.app/assets/wrg.png" /> <!-- Replace with your logo if desired -->
+  <meta name="neynar:app_url" content="https://wrg-backend.onrender.com" />
+  <meta name="neynar:app_icon" content="https://wrg-swb1.vercel.app/assets/wrg.png" />
 
-  <!-- ✅ Neynar SDK -->
   <script src="https://cdn.neynar.com/js/farcaster.min.js"></script>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
-    <div class="header-left">WRG 🍁</div>
+    <div class="header-left"><a href="">WRG 🍁</a></div>
     <button id="you-btn" class="you-btn">👤</button>
   </header>
 
-  <!-- MAIN GAME AREA -->
   <main>
     <div id="game-display">
       <h1 id="word-title">Word Challenge</h1>
@@ -47,15 +43,13 @@
     </div>
   </main>
 
-  <!-- FOOTER NAVIGATION -->
   <footer>
-    <button id="home-btn" class="footer-btn">🏠</button>
-    <button id="leaderboard-btn" class="footer-btn">🏆</button>
-    <button id="tasks-btn" class="footer-btn">📋</button>
-    <button id="how-btn" class="footer-btn">🎮</button>
+    <button id="home-btn" class="footer-btn">🏠<br>Home</button>
+    <button id="leaderboard-btn" class="footer-btn">🏆<br>Leaderboard</button>
+    <button id="tasks-btn" class="footer-btn">📋<br>Tasks</button>
+    <button id="how-btn" class="footer-btn">🎮<br>How to play</button>
   </footer>
 
-  <!-- UNIVERSAL OVERLAY -->
   <div id="overlay" class="overlay" aria-hidden="true" style="display:none;">
     <div class="overlay-content">
       <button id="overlay-close" class="close-btn">✖️</button>
@@ -64,7 +58,6 @@
     </div>
   </div>
 
-  <!-- START OVERLAY -->
   <div id="start-overlay" class="start-overlay active" role="dialog" aria-modal="true">
     <div class="start-content">
       <h1>WELCOME TO WRG</h1>
@@ -72,7 +65,6 @@
     </div>
   </div>
 
-  <!-- ✅ Farcaster SDK init (optional for testing) -->
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
       if (window.Farcaster) {
@@ -86,7 +78,6 @@
     });
   </script>
 
-  <!-- app script -->
   <script src="app.js"></script>
 </body>
 </html>
