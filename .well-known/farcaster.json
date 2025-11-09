@@ -15,7 +15,7 @@
     "splashBackgroundColor": "#eeccff",
     "webhookUrl": "https://https://wrg-swb1.vercel.app/api/webhook",
     "subtitle": "Connect and share ",
-    "description": "Play, test your knowledge and rank the leaderboard ",
+    "description": "Play, test your knowledge and rank the leaderboard",
     "primaryCategory": "games",
     "screenshotUrls": [
       "https://wrg-swb1.vercel.app/assets/wrg.png"
@@ -26,10 +26,10 @@
       "wrg",
       "earn"
     ],
-    "tagline": "Play and rank the leaderboard ",
-    "ogTitle": "WRG - Words Random Game ",
+    "tagline": "Play and rank the leaderboard",
+    "ogTitle": "WRG - Words Random Game",
     "ogDescription": "Come play and rank the leaderboard ",
     "ogImageUrl": "https://wrg-swb1.vercel.app/assets/social.png",
-    "castShareUrl": "https://warpcast.com/~/compose?text=Hi,+come+along+let's+rank+the+leaderboard "
+    "castShareUrl": "https://warpcast.com/~/compose?text=Hi,+come+along+let's+rank+the+leaderboard"
   }
 }
