@@ -11,7 +11,7 @@
     "homeUrl": "https://wrg-swb1.vercel.app",
     "imageUrl": "https://wrg-swb1.vercel.app/assets/image.png",
     "buttonTitle": "Open mini app",
-    "splashImageUrl": "https://wrg-swb1.vercel.app/assets/splash.png",
+    "splashImageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
     "splashBackgroundColor": "#eeccff",
     "webhookUrl": "https://wrg-swb1.vercel.app/api/webhook",
     "subtitle": "Connect and share ",
