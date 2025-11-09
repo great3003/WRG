@@ -29,6 +29,7 @@
     "tagline": "Play and rank the leaderboard",
     "ogTitle": "WRG - Words Random Game",
     "ogDescription": "Come play and rank the leaderboard ",
+    "ogImageUrl": "https://wrg-swb1.vercel.app"
     "castShareUrl": "https://warpcast.com/~/compose?text=Hi,+come+along+let's+rank+the+leaderboard"
   }
 }
