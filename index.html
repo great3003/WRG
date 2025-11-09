@@ -11,6 +11,24 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@farcaster/miniapp-sdk/dist/browser.min.js"></script>
   <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@farcaster/miniapp-sdk/dist/browser.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    try {
+      const sdk = window.Farcaster;
+
+      // (Optional) Get user info if logged in
+      const user = await sdk.user();
+      console.log("Connected user:", user);
+
+      // ✅ Notify Farcaster the Mini App is ready
+      await sdk.actions.ready();
+      console.log("SDK ready!");
+    } catch (err) {
+      console.error("Error initializing SDK:", err);
+    }
+  });
+</script>
  </head>
 <body>
 
@@ -61,26 +79,9 @@
       <button id="start-btn">Start Game</button>
     </div>
   </div>
-
-  <script>
-  document.addEventListener("DOMContentLoaded", async () => {
-    if (window.Farcaster) {
-      try {
-        const user = await window.Farcaster.user();
-        console.log("Connected Farcaster user:", user);
-      } catch (err) {
-        console.log("Farcaster SDK not available yet:", err);
-      }
-
-      // ✅ Tell Farcaster the Mini App is fully ready
-      window.Farcaster.ready();
-    } else {
-      console.warn("Farcaster SDK not found on window.");
-    }
-  });
-</script>
 </body>
 </html>
+
 
 
 
