@@ -5,14 +5,31 @@
     "signature": "Bq4IzWp38jkUInEErAGOdYx+g+WIHQPKFDmA9KrzJOpnRyD0HoKyrtGYw1m4OJ1Dd7zo/UoxQEJ5oJbXBarB5Bw="
   },
   "frame": {
-    "version": "1",
     "name": "WRG",
-    "iconUrl": "https://wrg-swb1.vercel.app/wrg.png",
-    "homeUrl": "https://wrg-swb1.vercel.app",
-    "imageUrl": "https://wrg-swb1.vercel.app/wrg.png",
-    "buttonTitle": "Open WRG",
-    "splashImageUrl": "https://wrg-swb1.vercel.app/wrg.png",
+    "version": "1",
+    "iconUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
+    "homeUrl": "https://https://wrg-swb1.vercel.app",
+    "imageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
+    "buttonTitle": "Open mini app",
+    "splashImageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
     "splashBackgroundColor": "#eeccff",
-    "webhookUrl": "https://wrg-swb1.vercel.app/api/webhook"
+    "webhookUrl": "https://https://wrg-swb1.vercel.app/api/webhook",
+    "subtitle": "Connect and share ",
+    "description": "Play, test your knowledge and rank the leaderboard ",
+    "primaryCategory": "games",
+    "screenshotUrls": [
+      "https://wrg-swb1.vercel.app/assets/wrg.png"
+    ],
+    "heroImageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
+    "tags": [
+      "games",
+      "wrg",
+      "earn"
+    ],
+    "tagline": "Play and rank the leaderboard ",
+    "ogTitle": "WRG - Words Random Game ",
+    "ogDescription": "Come play and rank the leaderboard ",
+    "ogImageUrl": "https://wrg-swb1.vercel.app/assets/social.png",
+    "castShareUrl": "https://warpcast.com/~/compose?text=Hi,+come+along+let's+rank+the+leaderboard "
   }
 }
