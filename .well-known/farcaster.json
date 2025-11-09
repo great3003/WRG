@@ -7,27 +7,12 @@
   "frame": {
     "version": "1",
     "name": "WRG",
-    "iconUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
+    "iconUrl": "https://wrg-swb1.vercel.app/wrg.png",
     "homeUrl": "https://wrg-swb1.vercel.app",
-    "imageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
+    "imageUrl": "https://wrg-swb1.vercel.app/wrg.png",
     "buttonTitle": "Open WRG",
-    "splashImageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
+    "splashImageUrl": "https://wrg-swb1.vercel.app/wrg.png",
     "splashBackgroundColor": "#eeccff",
-    "webhookUrl": "https://api.neynar.com/f/app/cdc2d0c3-e948-47bd-b915-7e3f1a32f685/event",
-    "subtitle": "Words random game"
-    "description": "Test your knowledge and earn while at it"
-
-    "primaryCategory": "Games",
-    "tags": [
-      "words",
-      "wrg",
-      "warpcast",
-      "earn"
-    ],
-    "heroImageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
-    "tagline": "Words game",
-    "ogTitle": "Words",
-    "ogDescription": "Climb the leaderboard and earn rewards by playing and ranking up.",
-    "ogImageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png"
+    "webhookUrl": "https://wrg-swb1.vercel.app/api/webhook"
   }
 }
