@@ -29,19 +29,24 @@ const sounds = {
   gameover: new Audio("sounds/gameover.mp3"),  
 };  
 
-import { sdk } from '@farcaster/miniapp-sdk'
+document.addEventListener("DOMContentLoaded", async () => {
 
-// Wait until the DOM is ready
-window.addEventListener('DOMContentLoaded', async () => {
-  console.log('DOM fully loaded.')
+console.log("⏳ Checking for Farcaster SDK...");
+if (window.Farcaster) {
+console.log("✅ Farcaster SDK detected");
 
-  // Simulate loading or setup tasks (optional)
-  await new Promise(resolve => setTimeout(resolve, 1000))
+try {  
+  const user = await window.Farcaster.user();  
+  console.log("👤 User fetched:", user);  
+  alert(`Welcome ${user.display_name || user.username || "Player"}`);  
+} catch (err) {  
+  console.error("❌ Could not fetch Farcaster user:", err);  
+}
 
-  // Tell Farcaster that your app is ready to display
-  await sdk.actions.ready()
-  console.log('Mini app is ready!')
-})
+} else {
+console.error("❌ Farcaster SDK not loaded");
+}
+});
 
 let score = 0;  
 let baseRoundTime = 40;  
@@ -233,7 +238,7 @@ howBtn.addEventListener("click", () => {
     `<p>Type words starting with the shown letter.<br>Longer words = more points.<br>Each round shortens your time!<br>Reward pool coming soon!!</p>`  
   );  
 });  
-
+ 
 youBtn.addEventListener("click", async () => {  
   openOverlay("Your Profile", "<p>Loading profile...</p>");  
   try {  
@@ -361,5 +366,3 @@ updateUI();
 
 });
 })();
-
-
