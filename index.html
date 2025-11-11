@@ -72,31 +72,28 @@
     </div>
   </div>
 
-  <!-- ✅ Load SDK via CDN instead of import -->
-  <script src="https://www.unpkg.com/@farcaster/miniapp-sdk/dist/browser.min.js"></script>
+  <!-- ✅ Correct SDK for Farcaster Mini Apps -->
+  <script type="module">
+    import { sdk } from 'https://esm.sh/@farcaster/miniapp-sdk';
 
-  <script>
     window.addEventListener('DOMContentLoaded', async () => {
-      if (!window.FarcasterMiniApp) {
-        console.error('❌ FarcasterMiniApp not found');
-        return;
+      try {
+        // Notify Warpcast that your Mini App is ready to show
+        await sdk.actions.ready();
+        console.log('✅ Farcaster Mini App SDK ready');
+
+        // Example: listen for Warpcast "action" events
+        sdk.actions.on('action', (event) => {
+          console.log('🔥 Action triggered:', event);
+        });
+
+        // Optional: respond to local game button clicks
+        document.getElementById('start-btn').addEventListener('click', () => {
+          console.log('🎮 Game start clicked!');
+        });
+      } catch (err) {
+        console.error('❌ SDK init error:', err);
       }
-
-      const sdk = new FarcasterMiniApp();
-
-      await sdk.actions.ready();
-      console.log('✅ Farcaster Mini App SDK ready');
-
-      // Example: Listen for Farcaster "action" events
-      sdk.actions.on('action', (event) => {
-        console.log('🔥 Action triggered:', event);
-      });
-
-      // Optional: respond to local game button clicks
-      document.getElementById('start-btn').addEventListener('click', () => {
-        console.log('🎮 Game start clicked!');
-        // You can also call sdk.actions.openUrl() or sdk.actions.postMessage()
-      });
     });
   </script>
 </body>
