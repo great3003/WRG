@@ -115,9 +115,7 @@
             console.error('❌ Failed to add Mini App:', err);
           }
         });
-        sdk.actions.on('action', (event) => {
-          console.log('🔥 Action triggered:', event);
-        });
+
 
         // Optional: respond to local game button clicks
         document.getElementById('start-btn').addEventListener('click', () => {
@@ -130,6 +128,7 @@
   </script>
 </body>
 </html>
+
 
 
 
