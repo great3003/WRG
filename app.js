@@ -29,10 +29,6 @@ const sounds = {
   gameover: new Audio("sounds/gameover.mp3"),  
 };  
 
-import { sdk } from '@farcaster/miniapp-sdk'
- 
-// After your app is fully loaded and ready to display
-await sdk.actions.ready()
 
 let score = 0;  
 let baseRoundTime = 40;  
@@ -352,4 +348,5 @@ updateUI();
 
 });
 })();
+
 
