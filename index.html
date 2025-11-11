@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>WRG</title>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- ✅ Proper Mini App metadata -->
   <meta name="fc:miniapp" content='{
     "version": "1",
     "imageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
@@ -19,12 +21,11 @@
       }
     }
   }' />
-
 </head>
-  <body>
 
+<body>
   <header>
-    <div class="header-left"><a href="">WRG 🍁</a></div>
+    <div class="header-left"><a href="#">WRG 🍁</a></div>
     <button id="you-btn" class="you-btn">👤</button>
   </header>
 
@@ -56,7 +57,7 @@
     <button id="how-btn" class="footer-btn">🎮<br>How to play</button>
   </footer>
 
-  <div id="overlay" class="overlay" aria-hidden="true" style="display:none;">
+  <div id="overlay" class="overlay" style="display:none;">
     <div class="overlay-content">
       <button id="overlay-close" class="close-btn">✖️</button>
       <h2 id="overlay-title"></h2>
@@ -70,29 +71,33 @@
       <button id="start-btn">Start Game</button>
     </div>
   </div>
-    <script type="module">
-  import { sdk } from 'https://esm.sh/@farcaster/miniapp-sdk'
-    </script>
-    <script>import { sdk } from '@farcaster/miniapp-sdk'
-  await sdk.actions.ready()</script>
+
+  <!-- ✅ Load SDK via CDN instead of import -->
+  <script src="https://www.unpkg.com/@farcaster/miniapp-sdk/dist/browser.min.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', async () => {
+      if (!window.FarcasterMiniApp) {
+        console.error('❌ FarcasterMiniApp not found');
+        return;
+      }
+
+      const sdk = new FarcasterMiniApp();
+
+      await sdk.actions.ready();
+      console.log('✅ Farcaster Mini App SDK ready');
+
+      // Example: Listen for Farcaster "action" events
+      sdk.actions.on('action', (event) => {
+        console.log('🔥 Action triggered:', event);
+      });
+
+      // Optional: respond to local game button clicks
+      document.getElementById('start-btn').addEventListener('click', () => {
+        console.log('🎮 Game start clicked!');
+        // You can also call sdk.actions.openUrl() or sdk.actions.postMessage()
+      });
+    });
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
