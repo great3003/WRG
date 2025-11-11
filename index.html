@@ -6,6 +6,32 @@
   <title>WRG</title>
   <link rel="stylesheet" href="style.css" />
 
+  
+‎  <script src="https://www.unpkg.com/@farcaster/frame-sdk/dist/frame-sdk.js"></script>
+‎
+‎  <script>
+‎    window.addEventListener('load', () => {
+‎      // Make sure the SDK exists
+‎      if (window.FarcasterFrame) {
+‎        const sdk = new FarcasterFrame();
+‎        
+‎        sdk.ready().then(() => {
+‎          console.log('✅ Farcaster Frame SDK is ready!');
+‎          
+‎          // Example: get user info or do other SDK operations
+‎          sdk.user().then(user => {
+‎            console.log('Connected user:', user);
+‎          });
+‎        }).catch(err => {
+‎          console.error('SDK failed to initialize:', err);
+‎        });
+‎
+‎      } else {
+‎        console.error('FarcasterFrame not found. Make sure the script loaded.');
+‎      }
+‎    });
+‎  </script>
+
   <meta name="fc:miniapp" content='{
     "version": "1",
     "imageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
@@ -97,6 +123,7 @@
   </div>
 </body>
 </html>
+
 
 
 
