@@ -48,6 +48,13 @@
         <p id="score">Score: ?</p>
       </div>
     </div>
+    
+    <div style="margin-top: 30px; text-align: center;">
+      <button id="add-miniapp-btn"
+        style="padding:10px 20px; border-radius:8px; background:#9146FF; color:white; border:none; cursor:pointer;">
+        ➕ Add WRG to Farcaster
+      </button>
+    </div>
   </main>
 
   <footer>
@@ -72,17 +79,44 @@
     </div>
   </div>
 <script src="app.js"></script>
-  <!-- ✅ Correct SDK for Farcaster Mini Apps -->
   <script type="module">
     import { sdk } from 'https://esm.sh/@farcaster/miniapp-sdk';
 
     window.addEventListener('DOMContentLoaded', async () => {
+      const addBtn = document.getElementById('add-miniapp-btn');
       try {
-        // Notify Warpcast that your Mini App is ready to show
         await sdk.actions.ready();
         console.log('✅ Farcaster Mini App SDK ready');
+    // Detect if running inside Warpcast
+        const context = await sdk.context.get();
+        const inFarcaster = context?.client === 'warpcast';
+        console.log('📱 Running inside Farcaster:', inFarcaster);
 
-        // Example: listen for Warpcast "action" events
+        // If not in Warpcast → hide the Add button
+        if (!inFarcaster) {
+          addBtn.style.display = 'none';
+          return;
+        }
+
+        // Detect if Mini App already added to home
+        const installStatus = await sdk.actions.getInstallStatus();
+        console.log('📦 Install status:', installStatus);
+
+        if (installStatus?.installed) {
+          // Already added → hide button
+          addBtn.style.display = 'none';
+        }
+
+        // Add click handler for button
+        addBtn.addEventListener('click', async () => {
+          try {
+            await sdk.actions.addToHomeScreen();
+            console.log('🎉 Mini App added successfully!');
+            addBtn.style.display = 'none'; // hide button after adding
+          } catch (err) {
+            console.error('❌ Failed to add Mini App:', err);
+          }
+        });
         sdk.actions.on('action', (event) => {
           console.log('🔥 Action triggered:', event);
         });
@@ -98,6 +132,7 @@
   </script>
 </body>
 </html>
+
 
 
 
