@@ -29,24 +29,10 @@ const sounds = {
   gameover: new Audio("sounds/gameover.mp3"),  
 };  
 
-document.addEventListener("DOMContentLoaded", async () => {
-
-console.log("⏳ Checking for Farcaster SDK...");
-if (window.Farcaster) {
-console.log("✅ Farcaster SDK detected");
-
-try {  
-  const user = await window.Farcaster.user();  
-  console.log("👤 User fetched:", user);  
-  alert(`Welcome ${user.display_name || user.username || "Player"}`);  
-} catch (err) {  
-  console.error("❌ Could not fetch Farcaster user:", err);  
-}
-
-} else {
-console.error("❌ Farcaster SDK not loaded");
-}
-});
+import { sdk } from '@farcaster/miniapp-sdk'
+ 
+// After your app is fully loaded and ready to display
+await sdk.actions.ready()
 
 let score = 0;  
 let baseRoundTime = 40;  
@@ -366,3 +352,4 @@ updateUI();
 
 });
 })();
+
