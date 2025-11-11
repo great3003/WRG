@@ -20,29 +20,6 @@
     }
   }' />
 
-  <meta name="fc:frame" content='{
-    "version": "1",
-    "imageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
-    "button": {
-      "title": "Start",
-      "action": {
-        "type": "launch_frame",
-        "name": "WRG!",
-        "url": "https://wrg-swb1.vercel.app",
-        "splashImageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
-        "splashBackgroundColor": "#eeccff"
-      }
-    }
-  }' />
-
-  <meta property="og:title" content="WRG" />
-  <meta property="fc:frame" content="vNext" />
-  <meta property="fc:frame:image" content="https://wrg-swb1.vercel.app/assets/wrg.png" />
-  <meta property="fc:frame:button:1" content="Click Me" />
-  <meta property="fc:frame:button:1:action" content="link" />
-  <meta property="fc:frame:button:1:target" content="https://wrg-swb1.vercel.app" />
-
-  <script src="https://cdn.jsdelivr.net/npm/@farcaster/miniapp-sdk/dist/browser.min.js"></script>
 </head>
   <body>
 
@@ -97,8 +74,11 @@
     <script type="module">
   import { sdk } from 'https://esm.sh/@farcaster/miniapp-sdk'
     </script>
+    <script>import { sdk } from '@farcaster/miniapp-sdk'
+  await sdk.actions.ready()</script>
 </body>
 </html>
+
 
 
 
