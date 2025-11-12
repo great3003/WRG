@@ -108,7 +108,7 @@
         // Add click handler for button
         addBtn.addEventListener('click', async () => {
           try {
-            await sdk.actions.addToHomeScreen();
+            await sdk.actions.addMiniApp();
             console.log('🎉 Mini App added successfully!');
             addBtn.style.display = 'none'; // hide button after adding
           } catch (err) {
@@ -128,6 +128,7 @@
   </script>
 </body>
 </html>
+
 
 
 
