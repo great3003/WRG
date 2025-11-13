@@ -239,7 +239,7 @@
     howBtn.addEventListener("click", () => {
       openOverlay(
         "How to Play",
-        `<p>Type words starting with the shown letter.<br>Longer words = more points.<br>Each round shortens your time!<br>Reward pool coming soon!!</p>`
+        `<p>Type words starting with the shown letter.<br>Longer words = more points.<br>Each round shortens your time!<br>Reward pool coming soon!!<br>Still under development tho..soo stick with me a lil</p>`
       );
     });
 
@@ -377,3 +377,4 @@
     updateUI();
   });
 })();
+
