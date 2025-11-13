@@ -90,6 +90,24 @@ main {
   100% { box-shadow: 0 0 20px rgba(78, 205, 196, 0.5); }
 }
 
+#overlay-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff4747;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#overlay-close:hover {
+  background: #ff1a1a;
+}
+
 footer {
   background-color: var(--footer-color);
   padding: 15px 10px;
@@ -728,3 +746,4 @@ button:hover {
 .player.top-3 .badge-icon {
   filter: drop-shadow(0 0 6px rgba(255,255,255,0.6));
 }
+
