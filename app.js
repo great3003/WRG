@@ -127,7 +127,9 @@
 
         if (shareBtn)
           shareBtn.addEventListener("click", () => {
-            const shareText = `I just scored ${score} points on WRG ⚡ Can you beat me?<br>https://farcaster.xyz/miniapps/D2ZcNcKqxucI/wrg`;
+            const shareText = `I just scored ${score} points on WRG ⚡
+            Can you beat me?
+            https://farcaster.xyz/miniapps/D2ZcNcKqxucI/wrg`;
             const shareUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}`;
             window.open(shareUrl, "_blank");
           });
