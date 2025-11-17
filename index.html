@@ -6,7 +6,7 @@
   <title>WRG</title>
   <link rel="stylesheet" href="style.css" />
 
-  <!-- ✅ Proper Mini App metadata -->
+  <!-- Mini App metadata -->
   <meta name="fc:miniapp" content='{
     "version": "1",
     "imageUrl": "https://wrg-swb1.vercel.app/assets/wrg.png",
@@ -57,6 +57,7 @@
     <button id="how-btn" class="footer-btn">🎮<br>How to play</button>
   </footer>
 
+  <!-- Overlay -->
   <div id="overlay" class="overlay" style="display:none;">
     <div class="overlay-content">
       <button id="overlay-close" class="close-btn">✖️</button>
@@ -65,6 +66,7 @@
     </div>
   </div>
 
+  <!-- Start overlay -->
   <div id="start-overlay" class="start-overlay active" role="dialog" aria-modal="true">
     <div class="start-content">
       <h1>WELCOME TO WRG</h1>
@@ -72,54 +74,54 @@
     </div>
   </div>
 
-  <!-- ✅ Neon Add WRG button -->
-  <button id="add-miniapp-btn" style="display:none; background: #39ff14; color: black; padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold; position: fixed; bottom: 80px; right: 20px; z-index: 1000;">
+  <!-- Add WRG button -->
+  <button id="add-miniapp-btn"
+    style="display:none;background:#39ff14;color:black;padding:10px 20px;border:none;
+    border-radius:5px;font-weight:bold;position:fixed;bottom:80px;right:20px;z-index:1000;">
     Add WRG
   </button>
 
   <script src="app.js"></script>
-  <script type="module">
-    import { sdk } from 'https://esm.sh/@farcaster/miniapp-sdk';
 
-    window.addEventListener('DOMContentLoaded', async () => {
-      const addBtn = document.getElementById('add-miniapp-btn');
+  <script type="module">
+    import { sdk } from "https://esm.sh/@farcaster/miniapp-sdk";
+
+    window.addEventListener("DOMContentLoaded", async () => {
+      const addBtn = document.getElementById("add-miniapp-btn");
 
       try {
         await sdk.actions.ready();
-        console.log('✅ Farcaster Mini App SDK ready');
+        console.log("SDK ready");
 
-        const context = await sdk.context.get();
-        const inFarcaster = context?.client === 'warpcast';
-        console.log('📱 Running inside Farcaster:', inFarcaster);
+        const ctx = await sdk.context.get();
+        const isFarcaster = ctx?.client === "warpcast";
 
-        if (!inFarcaster) {
-          addBtn.style.display = 'none';
+        if (!isFarcaster) {
+          console.warn("Not inside Farcaster");
           return;
         }
 
         const isAdded = await sdk.actions.isMiniAppAdded();
-        console.log('📦 Already added?', isAdded);
+        console.log("Mini app added?", isAdded);
 
+        // Show button only if not added
         if (!isAdded) {
-          sdk.actions.addMiniApp(); // Prompt immediately
-          addBtn.style.display = 'block';
+          addBtn.style.display = "block";
         }
 
-        addBtn.addEventListener('click', async () => {
+        // Add mini app on click
+        addBtn.addEventListener("click", async () => {
           try {
             await sdk.actions.addMiniApp();
-            console.log('🎉 Mini App added successfully!');
-            addBtn.style.display = 'none';
-          } catch (err) {
-            console.error('❌ Failed to add Mini App:', err);
+            console.log("Mini app added");
+            addBtn.style.display = "none";
+          } catch (e) {
+            console.error("Add mini app failed:", e);
           }
         });
 
-        document.getElementById('start-btn').addEventListener('click', () => {
-          console.log('🎮 Game start clicked!');
-        });
       } catch (err) {
-        console.error('❌ SDK init error:', err);
+        console.error("SDK init failed:", err);
       }
     });
   </script>
